@@ -74,3 +74,9 @@ class DBStorage:
     def close(self):
         """call remove() method on the private session attribute"""
         self.__session.remove()
+
+    def get(self, cls, id):
+        """retrieve one object of class cls and id id"""
+        tmp_dict = self.all(cls)
+        k = "{}.{}".format(cls, id)
+        return tmp_dict.get(k)
