@@ -71,6 +71,9 @@ class FileStorage:
 
     def get(self, cls, id):
         """retrieve one object of class cls and id id"""
-        tmp_dict = self.all(cls)
         k = "{}.{}".format(cls, id)
-        return tmp_dict.get(k)
+        return self.all(cls).get(k)
+
+    def count(self, cls=None):
+        """return number of objects of class cls"""
+        return len(self.all(cls))
