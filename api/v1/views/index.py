@@ -16,10 +16,11 @@ def status_ok():
     """
     return jsonify(status="OK")
 
+
 @app_views.route("/stats")
 def stats_quantity():
     """
-    pending
+    retrieves the number of each objects by type
     """
     names = {
         "Amenity": "amenities",
