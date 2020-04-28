@@ -120,7 +120,7 @@ class TestFileStorage(unittest.TestCase):
         fs_state1 = State(name='Californiaa')
         models.storage.new(fs_state1)
         models.storage.save()
-        key = models.storage.get('State', fs_state1.id)
+        key = models.storage.get(State, fs_state1.id)
         self.assertEqual(key.id, fs_state1.id)
 
     @unittest.skipIf(models.storage_t == 'db', "not testing file storage")

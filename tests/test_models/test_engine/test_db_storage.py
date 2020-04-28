@@ -93,7 +93,7 @@ class TestFileStorage(unittest.TestCase):
         db_state1 = State(name='Californiaa')
         models.storage.new(db_state1)
         models.storage.save()
-        key = models.storage.get('State', db_state1.id)
+        key = models.storage.get(State, db_state1.id)
         self.assertEqual(key.id, db_state1.id)
 
     @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
@@ -103,5 +103,5 @@ class TestFileStorage(unittest.TestCase):
         db_state2 = State(name='Alaskaa')
         models.storage.new(db_state2)
         models.storage.save()
-        n2 = models.storage.count('State')
+        n2 = models.storage.count(State)
         self.assertEqual(n1 + 1, n2)
