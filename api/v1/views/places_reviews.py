@@ -60,16 +60,18 @@ def post_review(place_id):
     except Exception:
         abort(400, "Not a JSON")
     if item_info:
-        if "text" in item_info and 'user_id' in item_info:
-            item = Review(**item_info)
-            setattr(item, "place_id", place_id)
-            item.save()
-            return (jsonify(item.to_dict()), 201)
-        else:
-            if 'user_id' not in item_info:
-                abort(400, "Missing user_id")
-            if 'text' not in item_info:
-                abort(400, "Missing text")
+        if 'user_id' not in item_info:
+            abort(400, "Missing user_id")
+        u = storage.get(User, item_info["user_id"])
+        if not u:
+            abort(404)
+        if 'text' not in item_info:
+            abort(400, "Missing text")
+        item = Review(**item_info)
+        setattr(item, "place_id", place_id)
+        item.save()
+        return (jsonify(item.to_dict()), 201)
+    
     else:
         abort(400, "Not a JSON")
 
