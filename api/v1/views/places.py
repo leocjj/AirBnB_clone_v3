@@ -14,9 +14,9 @@ from models import storage
 def get_place_by_state(city_id=None):
     """Get"""
     tmp_obj = []
-    item = storage.get(City, city_id)
-    if item:
-        for val in item.places:
+    r_item = storage.get(City, city_id)
+    if r_item:
+        for val in r_item.places:
             tmp_obj.append(val.to_dict())
         return jsonify(tmp_obj)
     else:
@@ -51,8 +51,8 @@ def delete_place(place_id=None):
 def post_place(city_id):
     """Create"""
 
-    item = storage.get(City, city_id)
-    if not item:
+    r_item = storage.get(City, city_id)
+    if not r_item:
         abort(404)
 
     try:

@@ -14,9 +14,9 @@ from models import storage
 def get_review_by_state(place_id=None):
     """Get"""
     tmp_obj = []
-    item = storage.get(Place, place_id)
-    if item:
-        for val in item.reviews:
+    r_item = storage.get(Place, place_id)
+    if r_item:
+        for val in r_item.reviews:
             tmp_obj.append(val.to_dict())
         return jsonify(tmp_obj)
     else:
@@ -51,8 +51,8 @@ def delete_review(review_id=None):
 def post_review(place_id):
     """Create"""
 
-    item = storage.get(Place, place_id)
-    if not item:
+    r_item = storage.get(Place, place_id)
+    if not r_item:
         abort(404)
 
     try:
