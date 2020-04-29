@@ -52,7 +52,7 @@ def post_user():
     except Exception:
         abort(400, "Not a JSON")
     if item_info:
-        elif 'email' not in item_info:
+        if 'email' not in item_info:
             return jsonify({"error": "Missing email"}), 400
         elif 'password' not in item_info:
             return jsonify({"error": "Missing password"}), 400
