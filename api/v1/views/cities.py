@@ -54,10 +54,6 @@ def post_city(state_id):
     if not item:
         abort(404)
 
-        for val in item.cities():
-            tmp_obj.append(val.to_dict())
-        return jsonify(tmp_obj)
-
     try:
         item_info = request.get_json()
     except Exception:
@@ -74,14 +70,13 @@ def post_city(state_id):
         abort(400, "Not a JSON")
 
 
-#@app_views.route("/states", methods=["PUT"], strict_slashes=False)
 @app_views.route("/cities/<city_id>", methods=["PUT"],
                  strict_slashes=False)
 def put_city(city_id=None):
     """
     Update
     """
-    item = storage.get(State, city_id)
+    item = storage.get(City, city_id)
     if item:
         try:
             data = request.get_json()
@@ -89,7 +84,7 @@ def put_city(city_id=None):
             abort(400, "Not a JSON")
         if data:
             for k, v in data.items():
-                if (k != "id" and k != "city_id" and
+                if (k != "id" and k != "state_id" and
                         k != "created_at" and k != "updated_at"):
                     setattr(item, k, v)
             item.save()

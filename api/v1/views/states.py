@@ -62,7 +62,6 @@ def post_state():
         abort(400, "Not a JSON")
 
 
-#@app_views.route("/states", methods=["PUT"], strict_slashes=False)
 @app_views.route("/states/<state_id>", methods=["PUT"],
                  strict_slashes=False)
 def put_state(state_id=None):
@@ -77,8 +76,7 @@ def put_state(state_id=None):
             abort(400, "Not a JSON")
         if data:
             for k, v in data.items():
-                if (k != "id" and k != "state_id" and
-                        k != "created_at" and k != "updated_at"):
+                if (k != "id" and k != "created_at" and k != "updated_at"):
                     setattr(item, k, v)
 
             item.save()
