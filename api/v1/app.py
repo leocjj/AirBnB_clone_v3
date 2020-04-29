@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-dddd
+app module
 """
 from flask import Flask
 from models import storage
@@ -17,6 +17,7 @@ cors = CORS(app, resources={r"/api/*": {"origins": "0.0.0.0"}})
 
 @app.errorhandler(404)
 def resource_not_found(error):
+    """ not found url"""
     return (jsonify(error="Not found"), 404)
 
 
