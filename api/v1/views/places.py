@@ -5,6 +5,7 @@ place module
 from api.v1.views import app_views
 from flask import jsonify, abort, request
 from models.city import City
+from models.user import User
 from models.place import Place
 from models import storage
 
@@ -59,16 +60,17 @@ def post_place(city_id):
     except Exception:
         abort(400, "Not a JSON")
     if item_info:
-        if "name" in item_info and 'user_id' in item_info:
-            item = Place(**item_info)
-            setattr(item, "city_id", city_id)
-            item.save()
-            return (jsonify(item.to_dict()), 201)
-        else:
-            if 'user_id' not in item_info:
+        if 'user_id' not in item_info:
                 abort(400, "Missing user_id")
-            if 'name' not in item_info:
+        u = storage.get(User, item_info["user_id"])
+        if not u:
+            abort(404)
+        if 'name' not in item_info:
                 abort(400, "Missing name")
+        item = Place(**item_info)
+        setattr(item, "city_id", city_id)
+        item.save()
+        return (jsonify(item.to_dict()), 201)
     else:
         abort(400, "Not a JSON")
 
