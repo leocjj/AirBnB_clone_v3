@@ -71,7 +71,7 @@ def post_review(place_id):
         setattr(item, "place_id", place_id)
         item.save()
         return (jsonify(item.to_dict()), 201)
-    
+
     else:
         abort(400, "Not a JSON")
 
