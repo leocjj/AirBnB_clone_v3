@@ -65,7 +65,10 @@ def post_place(city_id):
             item.save()
             return (jsonify(item.to_dict()), 201)
         else:
-            abort(400, "Missing name")
+            if 'user_id' not in item_info:
+                abort(400, "Missing user_id")
+            if 'name' not in item_info:
+                abort(400, "Missing name")
     else:
         abort(400, "Not a JSON")
 
