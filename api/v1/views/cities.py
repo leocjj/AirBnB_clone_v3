@@ -79,11 +79,11 @@ def put_city(city_id=None):
     item = storage.get(City, city_id)
     if item:
         try:
-            data = request.get_json()
+            item_info = request.get_json()
         except Exception:
             abort(400, "Not a JSON")
-        if data:
-            for k, v in data.items():
+        if item_info:
+            for k, v in item_info.items():
                 if (k != "id" and k != "state_id" and
                         k != "created_at" and k != "updated_at"):
                     setattr(item, k, v)
