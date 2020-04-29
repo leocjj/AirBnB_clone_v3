@@ -52,12 +52,13 @@ def post_user():
     except Exception:
         abort(400, "Not a JSON")
     if item_info:
-        if "email" in item_info and "password" in item_info:
-            item = User(**item_info)
-            item.save()
-            return (jsonify(item.to_dict()), 201)
-        else:
-            abort(400, "Missing name")
+        if "email" in item_info:
+            abort(400, "Missing email")
+        if "password" in item_info:
+            abort(400, "Missing password")
+        item = User(**item_info)
+        item.save()
+        return (jsonify(item.to_dict()), 201)
     else:
         abort(400, "Not a JSON")
 
