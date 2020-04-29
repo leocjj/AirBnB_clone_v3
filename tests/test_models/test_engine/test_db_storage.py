@@ -99,7 +99,7 @@ class TestFileStorage(unittest.TestCase):
     @unittest.skipIf(models.storage_t != 'db', "not testing file storage")
     def test_fs_count(self):
         """Test db storage. count function"""
-        n1 = models.storage.count('State')
+        n1 = models.storage.count(State)
         db_state2 = State(name='Alaskaa')
         models.storage.new(db_state2)
         models.storage.save()
